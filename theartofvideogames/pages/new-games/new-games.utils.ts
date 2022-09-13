@@ -24,19 +24,23 @@ export const getGames = async () => {
 
     try{
 
-        const url: string = `https://api.igdb.com/v4/games`;
+        const url: string = 'https://cors-anywhere.herokuapp.com/https://api.igdb.com/v4/games';
+        // const url: string = 'https://api.igdb.com/v4/games';
 
-        // const config = {
-        //     headers: {
-        //         Client-ID: process.env.NEXT_PUBLIC_CLIENT_ID,
-        //         Authorization: process.env.NEXT_PUBLIC_SECRET_KEY
-        //     }
-        //   }
-        // };
-        const config = {};
+        const config = {
+            headers: { 
+                'Accept': 'application/json', 
+                'Client-ID': `${process.env.NEXT_PUBLIC_CLIENT_ID}`, 
+                'Authorization': `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`, 
+                'Content-Type': 'application/json'
+              }
+        };
 
-        const response = axios.get(url, config).then(response => {
-            return response.data;
+        const data = 'fields *;';
+
+        const response = axios.post(url, data,config)
+        .then(response => {
+            return response.data; 
         }).catch(error => {
             throw error;
         })
