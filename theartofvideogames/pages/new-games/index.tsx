@@ -8,23 +8,20 @@ const NewGames = () => {
     const initRequest = async (): Promise<void> => {
 
         try {
-            // const response = await getData();
+            const response = await getData();
+            setRequest(response);
             const secondResponse = await getGames();
             console.log(secondResponse);
-            // setRequest(response);
         } catch (error) {
             console.error(error);
         }
 
     };
 
-    useEffect(() => {
-        initRequest();
-    }, []);
-
     return (
         <>
             <h1>{JSON.stringify(request)}</h1>
+            <button onClick={() => initRequest()}>Abrir esta cosa</button>
         </>
     );
 };
