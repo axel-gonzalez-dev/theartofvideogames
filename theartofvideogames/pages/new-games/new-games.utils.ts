@@ -19,3 +19,33 @@ export const getData = async (): Promise<Object> => {
         throw error;
     };
 };
+
+export const getGames = async () => {
+
+    try{
+
+        const url: string = `https://api.igdb.com/v4/games`;
+
+        // const config = {
+        //     headers: {
+        //         Client-ID: process.env.NEXT_PUBLIC_CLIENT_ID,
+        //         Authorization: process.env.NEXT_PUBLIC_SECRET_KEY
+        //     }
+        //   }
+        // };
+        const config = {};
+
+        const response = axios.get(url, config).then(response => {
+            return response.data;
+        }).catch(error => {
+            throw error;
+        })
+
+        return response;
+
+    }catch(error){
+        console.error(error);
+        throw error;
+    }
+
+};
